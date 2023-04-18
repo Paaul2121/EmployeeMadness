@@ -14,7 +14,7 @@ const deleteEmployee = (id) => {
 
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
-  const [employees, setEmployees] = useState(null);
+  const [employees, setEmployees] = useState([]);
 
   const handleDelete = (id) => {
     deleteEmployee(id);

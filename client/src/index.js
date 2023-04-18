@@ -12,6 +12,7 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
+import EmployeeTable from "./Components/EmployeeTable";
 
 const router = createBrowserRouter([
   {

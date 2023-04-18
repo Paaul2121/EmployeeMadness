@@ -2,15 +2,18 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
+const app = express();
 
 const { MONGO_URL, PORT = 8080 } = process.env;
+
+const cors = require("cors");
+app.use(cors())
 
 if (!MONGO_URL) {
   console.error("Missing MONGO_URL environment variable");
   process.exit(1);
 }
 
-const app = express();
 app.use(express.json());
 
 app.get("/api/employees/", async (req, res) => {

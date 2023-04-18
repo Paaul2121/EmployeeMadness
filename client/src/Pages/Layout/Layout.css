@@ -19,3 +19,14 @@
 .Layout nav button:hover {
   box-shadow: 0px 0px 5px rgb(255, 255, 255);
 }
+
+#filterInput {
+  height: 40px;
+  position: absolute;
+  right: 15%;
+  top: 1.5%;
+  border: 2px solid black;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0.5rem;
+}

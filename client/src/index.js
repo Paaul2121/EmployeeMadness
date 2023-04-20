@@ -8,11 +8,13 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import EquipmentCreator from "./Pages/EquipmentCreator";
+import EquipmentList from "./Pages/EquipmentList";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
-import EmployeeTable from "./Components/EmployeeTable";
+import EquipmentUpdater from "./Pages/EquipmentUpdater";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/equipment",
+        element: <EquipmentList />
+      },
+      {
+        path: "/createEquipment",
+        element: <EquipmentCreator />
+      },
       {
         path: "/",
         element: <EmployeeList />,
@@ -31,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EmployeeUpdater />,
+      },
+      {
+        path: "/updateEquipment/:id",
+        element: <EquipmentUpdater />
       },
       {
         path: "/table-test",

@@ -18,12 +18,16 @@ const Layout = () => {
       <nav>
         <ul>
           <li className="grow">
-            <Link to="/">Employees</Link>
+            <Link to="/"> Employees </Link> 
+            <Link id="equipmentHeader" to="/equipment"> Equipment </Link>
           </li>
           <li>
               <input onInput={handleFilter} id="filterInput" placeholder="Filter level/position"></input>
             <Link to="/create">
               <button type="button">Create Employee</button>
+            </Link>
+            <Link to="/createEquipment">
+            <button type="button">Create Equipment</button>            
             </Link>
           </li>
         </ul>

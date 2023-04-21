@@ -4,8 +4,7 @@ import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
 import state from "../../Pages/Atom"
 
-const EmployeeTable = ({ employees, onDelete }) => {
-
+const EmployeeTable = ({ employees, onDelete, search }) => {
 
   const [filter, setFilter] = useAtom(state.filter)
   const [sort, setSort] = useState(0);
@@ -70,7 +69,7 @@ const EmployeeTable = ({ employees, onDelete }) => {
         <tbody>
           {
            employees.map(employee => {   
-            if(employee.level.includes(filter) || employee.position.includes(filter)){
+            if((employee.level.includes(filter) || employee.position.includes(filter)) && employee.name.includes(search)){
               return (
                 <tr key={employee._id}>
                   <td>{employee.name}</td>

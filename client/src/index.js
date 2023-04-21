@@ -23,6 +23,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/employees/:search",
+        element: <EmployeeList /> 
+      },
+      {
         path: "/equipment",
         element: <EquipmentList />
       },

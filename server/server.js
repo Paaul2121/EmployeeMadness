@@ -33,6 +33,11 @@ app.get("/api/employees/:id", async (req, res) => {
   return res.json(employee);
 });
 
+app.get("/api/checkBox", async (req, res) => {
+  const employees = await EmployeeModel.find({presence: false}).sort({ created: "desc" });
+  return res.json(employees);
+});
+
 app.get("/api/equipments/:id", async (req, res) => {
   const equipment = await EquipmentModel.findById(req.params.id);
   return res.json(equipment);
@@ -72,6 +77,14 @@ app.patch("/api/employees/:id", async (req, res, next) => {
     return next(err);
   }
 });
+
+app.patch("/api/checkBox", async (req, res, next) => {
+    const employee = await EmployeeModel.findById(req.body._id)
+    employee.presence = !employee.presence;
+    console.log(employee);
+    employee.save().then(employee => res.send(JSON.stringify(employee)));
+});
+
 
 app.patch("/api/equipments/:id", async (req, res, next) => {
   try {

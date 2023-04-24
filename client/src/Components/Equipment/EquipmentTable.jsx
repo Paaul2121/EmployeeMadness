@@ -60,6 +60,7 @@ const EquipmentTable = ({equipments, onDelete}) => {
             <th>Name</th>
             <th>Type</th>
             <th>Amount</th>
+            <th>Present</th>
             <th />
           </tr>
         </thead>

@@ -6,8 +6,12 @@ import state from "../../Pages/Atom"
 
 const EmployeeTable = ({ employees, onDelete, search }) => {
 
+
+  const [presence, setPresence] = useAtom(state.presence);
   const [filter, setFilter] = useAtom(state.filter)
   const [sort, setSort] = useState(0);
+
+  setPresence(employees);
 
   const sortByFirstName = () => {
     employees.map(employee => employee.name = employee.name.split(" "));
@@ -50,6 +54,18 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
     setSort(sort*1 + 1);
   }
 
+  const handleChange = (employee) => {
+
+    fetch("/api/checkBox", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(employee),
+    }).then((res) => res.json()).then(employee => console.log(employee));
+
+  }
+  
   return (
     <div className="EmployeeTable">
         <button onClick={sortByFirstName} id="sortButton">Sort by First Name</button>
@@ -63,18 +79,25 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
             <th>Name</th>
             <th>Level</th>
             <th>Position</th>
+            <th>Present</th>
             <th />
           </tr>
         </thead>
         <tbody>
           {
            employees.map(employee => {   
+            // if(employee.presence === undefined){
+            //   setAbsentEmployees((prev) => 
+            //     [...prev, employee]
+            //   )
+            // }
             if((employee.level.includes(filter) || employee.position.includes(filter)) && employee.name.includes(search)){
               return (
                 <tr key={employee._id}>
                   <td>{employee.name}</td>
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
+                  <td> <input type="checkbox" onChange={() => handleChange(employee)}></input> </td>
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>

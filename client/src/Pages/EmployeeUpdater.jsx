@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EmployeeForm from "../Components/EmployeeForm";
 import Loading from "../Components/Loading";
+import "./Pages.css";
+
 
 const updateEmployee = (employee) => {
   return fetch(`/api/employees/${employee._id}`, {
@@ -25,6 +27,7 @@ const EmployeeUpdater = () => {
   const [employee, setEmployee] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [employeeLoading, setEmployeeLoading] = useState(true);
+  const [equipment, setEquipment] = useState([]);
 
   useEffect(() => {
     setEmployeeLoading(true);
@@ -34,6 +37,12 @@ const EmployeeUpdater = () => {
         setEmployeeLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    fetch("/api/equipments/")
+    .then(res => res.json())
+    .then(equip => setEquipment(equip))
+  }, [])
 
   const handleUpdateEmployee = (employee) => {
     setUpdateLoading(true);
@@ -49,12 +58,15 @@ const EmployeeUpdater = () => {
   }
 
   return (
+    <>
     <EmployeeForm
       employee={employee}
       onSave={handleUpdateEmployee}
       disabled={updateLoading}
       onCancel={() => navigate("/")}
+      equipment={equipment}
     />
+    </>
   );
 };
 

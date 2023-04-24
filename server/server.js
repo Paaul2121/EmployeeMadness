@@ -24,7 +24,6 @@ app.get("/api/employees/", async (req, res) => {
 
 app.get("/api/equipments/", async (req, res) => {
   const equipment = await EquipmentModel.find().sort({ created: "desc" });
-  console.log("Ceva");
   return res.json(equipment);
 });
 

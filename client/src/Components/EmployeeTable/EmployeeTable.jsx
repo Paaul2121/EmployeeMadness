@@ -3,6 +3,7 @@ import "./EmployeeTable.css";
 import { useAtom } from "jotai";
 import { useState, useEffect } from "react";
 import state from "../../Pages/Atom"
+import Pagination from "../../Pages/Pagination";
 
 const EmployeeTable = ({ employees, onDelete, search }) => {
 
@@ -10,6 +11,12 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
   const [presence, setPresence] = useAtom(state.presence);
   const [filter, setFilter] = useAtom(state.filter)
   const [sort, setSort] = useState(0);
+  const [employeesPerPage, setEmployeesPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useAtom(state.currentPage);
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
   setPresence(employees);
 
@@ -65,7 +72,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
     }).then((res) => res.json()).then(employee => console.log(employee));
 
   }
-  
+
   return (
     <div className="EmployeeTable">
         <button onClick={sortByFirstName} id="sortButton">Sort by First Name</button>
@@ -76,6 +83,10 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
       <table>
         <thead>
           <tr>
+            <td>
+            </td>
+          </tr>
+          <tr>
             <th>Name</th>
             <th>Level</th>
             <th>Position</th>
@@ -85,12 +96,8 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
         </thead>
         <tbody>
           {
-           employees.map(employee => {   
-            // if(employee.presence === undefined){
-            //   setAbsentEmployees((prev) => 
-            //     [...prev, employee]
-            //   )
-            // }
+           currentEmployees.map(employee => {   
+
             if((employee.level.includes(filter) || employee.position.includes(filter)) && employee.name.includes(search)){
               return (
                 <tr key={employee._id}>
@@ -115,6 +122,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
           )}
         </tbody>
       </table>
+      <Pagination employees={employees} employeesPerPage={employeesPerPage} />
     </div>
   )
 }

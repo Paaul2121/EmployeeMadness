@@ -1,4 +1,5 @@
 const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -47,11 +48,11 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
       </div>
       <div className="control">
         <label htmlFor="equipment">Equipment:</label>
-      <select name="equipment">
-        {
+      <select value={employee?.equipment} name="equipment">
+        {    
          equipment?.map(equip => {
-          return(
-            <option value={equip.name}> {equip.name} </option>
+          return (
+            <option> {equip.name} </option>
           )
          }) 
         }

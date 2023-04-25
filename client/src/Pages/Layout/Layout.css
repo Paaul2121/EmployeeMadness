@@ -21,14 +21,8 @@
 }
 
 #filterInput {
-  height: 40px;
-  position: absolute;
-  right: 30%;
-  top: 1.5%;
-  border: 2px solid black;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 0.5rem;
+  height: 59px;
+  margin-right: 10px;
 }
 
 #equipment {

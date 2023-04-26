@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import state from "../../Pages/Atom"
 import Pagination from "../../Pages/Pagination";
 
+let counter = 0;
 const EmployeeTable = ({ employees, onDelete, search }) => {
-
 
   const [presence, setPresence] = useAtom(state.presence);
   const [filter, setFilter] = useAtom(state.filter)
@@ -61,6 +61,18 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
     setSort(sort*1 + 1);
   }
 
+  const sortByFullName = () => {
+    if(counter % 2 === 0){
+      employees.sort((a,b) => a.name > b.name ? 1 : -1);
+      counter++;
+    } else {
+      employees.sort((a,b) => b.name > a.name ? 1 : -1);
+      counter++;
+    }
+    console.log(counter);
+    setSort(sort*1 + 1);
+  }
+
   const handleChange = (employee) => {
 
     fetch("/api/checkBox", {
@@ -87,7 +99,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
             </td>
           </tr>
           <tr>
-            <th>Name</th>
+            <th onClick={sortByFullName}>Name</th>
             <th>Level</th>
             <th>Position</th>
             <th>Present</th>

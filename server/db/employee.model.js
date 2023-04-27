@@ -19,6 +19,10 @@ const EmployeeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  salary: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("Employee", EmployeeSchema);

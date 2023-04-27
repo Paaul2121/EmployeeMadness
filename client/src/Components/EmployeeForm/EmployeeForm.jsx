@@ -1,4 +1,8 @@
+import { useRef } from "react";
+
 const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
+
+  const levelRef = useRef(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +17,21 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
     console.log(employee)
     return onSave(employee);
   };
+
+  const handleSalary = (e) => {
+
+    if(e.target.value * 1 > 0 && e.target.value * 1 < 101){
+      levelRef.current.value = "Junior";
+    } else if(e.target.value > 100 && e.target.value < 301){
+      levelRef.current.value = "Medior";
+    } else if(e.target.value > 300 && e.target.value < 401){
+      levelRef.current.value = "Senior";
+    } else if(e.target.value > 400 && e.target.value < 801){
+      levelRef.current.value = "Expert";
+    } else if(e.target.value > 800){
+      levelRef.current.value = "Godlike";
+    } 
+  }
 
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
@@ -35,6 +54,8 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
           defaultValue={employee ? employee.level : null}
           name="level"
           id="level"
+          ref={levelRef}
+          readOnly
         />
       </div>
 
@@ -46,6 +67,17 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
           id="position"
         />
       </div>
+
+      <div className="control">
+        <label htmlFor="position">Salary:</label>
+        <input
+          onChange={(e) => handleSalary(e)}
+          defaultValue={employee ? employee.salary : null}
+          name="salary"
+          id="salary"
+        />
+      </div>
+
       <div className="control">
         <label htmlFor="equipment">Equipment:</label>
       <select value={employee?.equipment} name="equipment">

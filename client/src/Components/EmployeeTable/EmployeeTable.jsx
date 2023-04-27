@@ -13,6 +13,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
   const [sort, setSort] = useState(0);
   const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useAtom(state.currentPage);
+  const [counter, setCounter] = useState(0);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -82,8 +83,9 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
       },
       body: JSON.stringify(employee),
     }).then((res) => res.json()).then(employee => console.log(employee));
-
   }
+
+  
 
   return (
     <div className="EmployeeTable">
@@ -117,6 +119,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
                   <td> <input type="checkbox" onChange={() => handleChange(employee)}></input> </td>
+                  {/* <td> <input></input> </td> */}
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>

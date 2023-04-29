@@ -44,6 +44,30 @@ const router = createBrowserRouter([
         element: <EmployeeList />,
       },
       {
+        path: "/employees/name/asc",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employees/name/desc",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employees/level/asc",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employees/level/desc",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employees/position/asc",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employees/position/desc",
+        element: <EmployeeList />,
+      },
+      {
         path: "/create",
         element: <EmployeeCreator />,
       },

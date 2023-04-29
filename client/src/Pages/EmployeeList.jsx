@@ -30,6 +30,7 @@ const EmployeeList = () => {
   useEffect(() => {
     fetchEmployees()
     .then((employees) => {
+      console.log(employees)
       setLoading(false);
       setEmployees(employees);
     })

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
+const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment, brands }) => {
 
   const levelRef = useRef(null);
 
@@ -90,6 +90,21 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment }) => {
         }
       </select>
       </div>
+
+      <div className="control">
+        <label htmlFor="brands">Favorite Brands:</label>
+      <select value={brands?.name} name="brands">
+        {
+          brands?.map(brand => {
+            return(
+              <option> {brand.name} </option>
+            )
+          })
+        }
+      </select>
+      </div>
+
+      
 
       <div className="buttons">
         <button type="submit" disabled={disabled}>

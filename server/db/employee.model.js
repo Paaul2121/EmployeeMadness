@@ -7,6 +7,7 @@ const EmployeeSchema = new Schema({
   name: String,
   level: String,
   position: String,
+  favoriteBrands: { type: Schema.Types.ObjectId, ref: "Brand" },
   equipment: {
    type: String,
    default: "No Equipment" 

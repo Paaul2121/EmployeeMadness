@@ -13,7 +13,6 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
   const [sort, setSort] = useState(0);
   const [employeesPerPage, setEmployeesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useAtom(state.currentPage);
-  const [counter, setCounter] = useState(0);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -62,6 +61,32 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
     setSort(sort*1 + 1);
   }
 
+  const sortByLevelAscDesc = () => {
+
+    if(counter % 2 === 0){
+      employees.sort((a,b) => a.level > b.level ? 1 : -1);
+      counter++;
+    } else {
+      employees.sort((a,b) => b.level > a.level ? 1 : -1);
+      counter++;
+    }
+    console.log(counter);
+    setSort(sort*1 + 1);
+  }
+
+  const sortByPositionAscDesc = () => {
+
+    if(counter % 2 === 0){
+      employees.sort((a,b) => a.position > b.position ? 1 : -1);
+      counter++;
+    } else {
+      employees.sort((a,b) => b.position > a.position ? 1 : -1);
+      counter++;
+    }
+    console.log(counter);
+    setSort(sort*1 + 1);
+  }
+
   const sortByFullName = () => {
     if(counter % 2 === 0){
       employees.sort((a,b) => a.name > b.name ? 1 : -1);
@@ -101,10 +126,23 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
             </td>
           </tr>
           <tr>
-            <th onClick={sortByFullName}>Name</th>
-            <th>Level</th>
-            <th>Position</th>
+            <th onClick={sortByFullName} >
+            <Link to={counter % 2 === 0 ? "/employees/name/asc" : "/employees/name/desc"}>
+              Name
+            </Link>
+            </th>
+            <th onClick={sortByLevelAscDesc}> 
+            <Link to={counter % 2 === 0 ? "/employees/level/asc" : "/employees/level/desc"}>
+              Level
+            </Link>
+            </th>
+            <th onClick={sortByPositionAscDesc}> 
+            <Link to={counter % 2 === 0 ? "/employees/position/asc" : "/employees/position/desc"}>
+            Position
+            </Link>
+            </th>
             <th>Present</th>
+            <th>Favorite Brands</th>
             <th />
           </tr>
         </thead>
@@ -119,7 +157,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
                   <td>{employee.level}</td>
                   <td>{employee.position}</td>
                   <td> <input type="checkbox" onChange={() => handleChange(employee)}></input> </td>
-                  {/* <td> <input></input> </td> */}
+                  <td>{employee.favoriteBrands.name}</td>
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>

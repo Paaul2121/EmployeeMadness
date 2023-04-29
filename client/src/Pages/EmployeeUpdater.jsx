@@ -29,6 +29,7 @@ const EmployeeUpdater = () => {
   const [employeeLoading, setEmployeeLoading] = useState(true);
   const [equipment, setEquipment] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [colors, setColors] = useState([]);
 
   useEffect(() => {
     setEmployeeLoading(true);
@@ -49,6 +50,12 @@ const EmployeeUpdater = () => {
     fetch("/api/brands/")
     .then(res => res.json())
     .then(brand => setBrands(brand))
+  }, [])
+
+  useEffect(() => {
+    fetch("/api/colors/")
+    .then(res => res.json())
+    .then(color => setColors(color))
   }, [])
 
   const handleUpdateEmployee = (employee) => {
@@ -73,6 +80,7 @@ const EmployeeUpdater = () => {
       onCancel={() => navigate("/")}
       equipment={equipment}
       brands={brands}
+      colors={colors}
     />
     </>
   );

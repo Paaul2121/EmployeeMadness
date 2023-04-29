@@ -143,6 +143,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
             </th>
             <th>Present</th>
             <th>Favorite Brands</th>
+            <th>Favorite Colors</th>
             <th />
           </tr>
         </thead>
@@ -158,6 +159,7 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
                   <td>{employee.position}</td>
                   <td> <input type="checkbox" onChange={() => handleChange(employee)}></input> </td>
                   <td>{employee.favoriteBrands.name}</td>
+                  <td>{employee.favoriteColor.name}</td>
                   <td>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>

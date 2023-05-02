@@ -125,6 +125,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, equipment, brands,
         <button type="button" onClick={onCancel}>
           Cancel
         </button>
+
       </div>
     </form>
   );

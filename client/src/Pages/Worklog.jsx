@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
 import EmployeeForm from "../Components/EmployeeForm";
 import Loading from "../Components/Loading";
-import Worklog from "./Worklog";
 import "./Pages.css";
 
-
-const updateEmployee = (employee) => {
-  return fetch(`/api/employees/${employee._id}`, {
+const updateWorklog = (id, worklog) => {
+  console.log(id)
+  return fetch(`/worklog/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(employee),
+    body: JSON.stringify(worklog),
   }).then((res) => res.json());
 };
 
@@ -21,16 +21,15 @@ const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
 
-const EmployeeUpdater = () => {
+const Worklog = () => {
+  const hoursRef = useRef(null);
+  const workRef = useRef(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [employee, setEmployee] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [employeeLoading, setEmployeeLoading] = useState(true);
-  const [equipment, setEquipment] = useState([]);
-  const [brands, setBrands] = useState([]);
-  const [colors, setColors] = useState([]);
 
   useEffect(() => {
     setEmployeeLoading(true);
@@ -41,27 +40,9 @@ const EmployeeUpdater = () => {
       });
   }, [id]);
 
-  useEffect(() => {
-    fetch("/api/equipments/")
-    .then(res => res.json())
-    .then(equip => setEquipment(equip))
-  }, [])
-
-  useEffect(() => {
-    fetch("/api/brands/")
-    .then(res => res.json())
-    .then(brand => setBrands(brand))
-  }, [])
-
-  useEffect(() => {
-    fetch("/api/colors/")
-    .then(res => res.json())
-    .then(color => setColors(color))
-  }, [])
-
-  const handleUpdateEmployee = (employee) => {
+  const handleUpdateEmployee = () => {
     setUpdateLoading(true);
-    updateEmployee(employee)
+    updateWorklog(id, {hoursRef: hoursRef.current.value, workRef: workRef.current.value})
       .then(() => {
         setUpdateLoading(false);
         navigate("/");
@@ -74,17 +55,12 @@ const EmployeeUpdater = () => {
 
   return (
     <>
-    <EmployeeForm
-      employee={employee}
-      onSave={handleUpdateEmployee}
-      disabled={updateLoading}
-      onCancel={() => navigate("/")}
-      equipment={equipment}
-      brands={brands}
-      colors={colors}
-    />
+      <input ref={hoursRef}  />
+      <input ref={workRef}  />
+      <button onClick={handleUpdateEmployee}> Add Worklog </button>
     </>
   );
 };
 
-export default EmployeeUpdater;
+export default Worklog
+

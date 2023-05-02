@@ -24,6 +24,10 @@ const EmployeeSchema = new Schema({
   salary: {
     type: Number,
     default: 0
+  },
+  workLog: {
+    type: Array,
+    default: []
   }
 });
 

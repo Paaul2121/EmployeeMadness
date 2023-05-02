@@ -89,6 +89,15 @@ app.patch("/api/employees/:id", async (req, res, next) => {
   }
 });
 
+app.patch("/worklog/:id", async (req, res, next) => {
+
+  const employee = await EmployeeModel.findOne({ _id: req.params.id })
+  console.log(employee.workLog)
+  employee.workLog.push(req.body);
+  employee.save();
+  return res.json(employee)
+});
+
 app.patch("/api/checkBox", async (req, res, next) => {
     const employee = await EmployeeModel.findById(req.body._id)
     employee.presence = !employee.presence;

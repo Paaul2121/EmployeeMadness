@@ -11,6 +11,7 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import EquipmentCreator from "./Pages/EquipmentCreator";
 import EquipmentList from "./Pages/EquipmentList";
 import MissingEmployees from "./Pages/MissingEmployees";
+import Worklog from "./Pages/Worklog"
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/worklog/:id",
+        element: <Worklog />
+      },
       {
         path: "/employees/:search",
         element: <EmployeeList /> 

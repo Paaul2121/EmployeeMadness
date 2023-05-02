@@ -167,6 +167,10 @@ const EmployeeTable = ({ employees, onDelete, search }) => {
                     <button type="button" onClick={() => onDelete(employee._id)}>
                       Delete
                     </button>
+                    <Link to={`/worklog/${employee._id}`}>
+                      <button>Add worklog</button>  
+                    </Link>
+                    
                   </td>
                 </tr>
               )
